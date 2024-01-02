@@ -33,7 +33,7 @@ const InputBox = styled.input`
         color: #aaaaaa; 
     }
     &:focus {
-      border-color: #559BFF;
+      border-color: #38d9a9;
     }
 `;
 
@@ -46,7 +46,7 @@ const SummitBtn = styled.button`
     color: #ffffff;
     margin-top: 20px;
     border-radius: 10px;
-    background: #559BFF;
+    background: #38d9a9;
 `;
 
 const Details = styled.details`
@@ -81,7 +81,7 @@ const List = styled.li`
     list-style: none;
     padding: 10px 20px;
     &:hover{
-        background: #559cff1e;
+        background: #e9fff8;
     }
     &:last-child {
     border-bottom: none;
@@ -120,79 +120,15 @@ const Button = styled.button`
 `;
 
 
-const CouncilName = styled.div`
-    margin: 20px 0px 10px 0px;
-    font-weight: 700;
-
-`;
-const Items = styled.ul`
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: rgba(205, 207, 208, 0.5) 0px 0px 15px;
-
-    & li:not(:last-child){
-        border-bottom: 1px solid #dddddd;
-    }
-
-`;
-
-const Item = styled.li`
-    list-style: none;
-    padding: 10px 10px;
-    font-weight: 700;
-    color:#777777;
-    font-size: 15px;
-    height: 30px;
-    line-height: 30px;
-
-`;
-
-const ItemRemoveBtn = styled.button`
-    float: right;
-    border: none;
-    background: none;
-    margin-top: 5px;
-`;
-
-
-const CiAdd = () => {
-    const [councilData, setCouncilData] = useState({
-        college : '',
-        items : []
-    }); // 채팅방 리스트 상태
+const CouncillItemCreate = () => {
     const [name, setName] = useState("");
     const [type, setType] = useState("물품 유형"); 
     const [key, setKey] = useState(0); 
-    const { id } = useParams();
+    // const { id } = useParams();
     
 
     const [cookies] = useCookies(); // 쿠키 사용하기 위해
     const navigate = useNavigate(); // 페이지 이동 위해
-  
-    useEffect(() => {
-      const fetchCouncils = async () => {
-        try {
-          // 토큰 쿠키가 없다면 로그인 페이지로 이동
-          if (!cookies.token) {
-            navigate("/signin");
-            return;
-          }
-          const response = await axios.get("http://"+process.env.REACT_APP_BACK_URL+"/council/"+id, {
-            headers: {
-              Authorization: `Bearer ${cookies.token}`,
-            },
-          });
-
-          setCouncilData(response.data);
-          console.log(response.data);
-
-        } catch (error) {
-          console.error("오류 발생:", error);
-        }
-      };
-
-      fetchCouncils();
-    }, [cookies.token, navigate, key]); // [] 와 같이 비워도 됨.
 
 
     const handleAddCouncil = async (e) => {
@@ -211,40 +147,29 @@ const CiAdd = () => {
 
         try {
           // 회원가입 api 요청
-          const councilId = id;
-          const signUpResponse = await axios.post("http://"+process.env.REACT_APP_BACK_URL+"/council-item",
+        //   const councilId = id;
+          const signUpResponse = await axios.post("http://"+process.env.REACT_APP_BACK_URL+"/manage/council-item",
             {
-                councilId,
                 name,
                 type,
+            },
+            {
+                headers: {
+                Authorization: `Bearer ${cookies.token}`,
+                },
             }
           );
           // 성공시
           if (signUpResponse.status === 200) {
             window.alert("생성 성공");
             setKey(key+1);
-            // navigate("/");
+            navigate("/council/manage");
           }
         } catch (error) {
             console.error("오류 발생:", error);
           
         }
       };
-    const removeItem = async (id) => {
-        try {
-            console.log(id);
-            const response = await axios.delete("http://"+process.env.REACT_APP_BACK_URL+"/council-item/"+id, {
-            headers: {
-                Authorization: `Bearer ${cookies.token}`,
-            },
-            });
-            window.alert("삭제되었습니다.");
-            setKey(key+1);
-            console.log(response);
-        } catch (error) {
-            console.error("오류 발생:", error);
-        }
-    };
     return (
         <AdminBox>
             <Header headerType={"admin"} headerText={"물품 추가"}></Header>
@@ -276,22 +201,8 @@ const CiAdd = () => {
                 {/* 제출 버튼 */}
                 <SummitBtn onClick={handleAddCouncil}>추가</SummitBtn>
             </div>
-            <div>
-                <CouncilName>{councilData.name}</CouncilName>
-                <Items>
-                    {councilData.items.map((item) => (
-                        <Item key={item.itemId}>
-                            {item.type} - {item.name}
-                            <ItemRemoveBtn onClick={() => removeItem(item.itemId)}>
-                                <img src={"/image/remove.svg"}></img>
-                            </ItemRemoveBtn>
-                        </Item>
-                    ))}
-                </Items>
-                
-            </div>
         </AdminBox>
     );
   };
 
-export default CiAdd;
+export default CouncillItemCreate;

@@ -16,6 +16,11 @@ import CiManage from "./component/page/CiManage";
 import CiCreate from "./component/page/CiCreate";
 import CiAdd from "./component/page/CiAdd";
 import Certifi from "./component/page/Certifi";
+import CertifiManage from "./component/page/CertifiManage"
+import CouncilManage from "./component/page/CouncilManage"
+import ManagerSignIn from "./component/page/ManagerSignIn";
+import CouncilItemCreate from "./component/page/CouncilItemCreate";
+import CouncilInfoUpdate from "./component/page/CouncilInfoUpdate";
 
 const MainLayout = styled.div`
 `;
@@ -27,9 +32,14 @@ function App() {
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/certification" Component={Certifi} />
+          <Route path="/council/signin" Component={ManagerSignIn} />
+          <Route path="/council/manage" Component={CouncilManage} />
+          <Route path="/council/manage/info" Component={CouncilInfoUpdate} />
+          <Route path="/council/manage/item" Component={CouncilItemCreate} />
           <Route path="/admin" Component={Admin} />
           <Route path="/admin/cimanage" Component={CiManage} />
           <Route path="/admin/cimanage/create" Component={CiCreate} />
+          <Route path="/admin/certimanage" Component={CertifiManage} />
           <Route path="/admin/cimanage/add/:id" Component={CiAdd} />
           <Route path="/user/:userid" Component={User} />
           <Route path="/write" Component={Write} />

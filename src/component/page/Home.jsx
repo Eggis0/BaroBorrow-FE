@@ -13,15 +13,17 @@ import PostList from "./Home/PostList";
 // 홈 각 박스 제목
 const BoxTitle = styled.div`
   padding-top: 25px;
+  padding-bottom: 5px;
   padding-left: 20px;
   text-align: left;
   line-height: 50px;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 22px;
   color: #505050;
   @media screen and (max-width: 700px) {
     padding-top: 8px;
-    font-size: 22px;
+    padding-bottom: 10px;
+    font-size: 18px;
   }
 `;
 
@@ -38,39 +40,42 @@ const ImageIcon = styled.img`
 
 // 학생회 캠퍼스 선택 박스 Parent
 const ParentContainer = styled.div`
-  padding: 20px;
+  margin: 0px 20px;
+  height: 130px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
+  gap: 0px;
+  box-shadow: rgba(209, 209, 209, 0.4) 0px 0px 15px;
+  border-radius: 20px;
+  background: #ffffff;
   @media screen and (max-width: 700px) {
+    height: 100px;
     margin-top: -15px;
-    gap: 15px;
+    gap: 0px;
   }
 `;
 
 // 학생회 캠퍼스 선택 박스 Child
 const ContainerBox = styled.div`
-  background: #ffffff;
-  border-radius: 10px 10px 10px 10px;
-  height: 150px;
-  box-shadow: rgba(209, 209, 209, 0.4) 0px 0px 15px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover div {
+  /* &:hover div {
     font-size: 40px;
-  }
+  } */
+  margin: 10px 0px;
+  height: 110px;
+  ${({ isLeft }) => (isLeft ? "border-right: 1.5px solid #f5f5f5" : null)};
+  ${({ isLeft }) => (isLeft ? null : "border-left: 1.5px solid #f5f5f5")};
   @media screen and (max-width: 700px) {
-    &:hover div {
-      font-size: 25px;
-    }
-    height: 100px;
+    height: 80px;
   }
 `;
 
 // 대여 박스 Parent
 const CenterContainer = styled.div`
-  padding: 20px;
+  padding: 0px 20px;
   @media screen and (max-width: 700px) {
     margin-top: -15px;
   }
@@ -79,23 +84,37 @@ const CenterContainer = styled.div`
 // 대여 박스 Child
 const CenterBox = styled.div`
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 10px 0px;
   box-shadow: rgba(209, 209, 209, 0.4) 0px 0px 15px;
   align-items: center;
   justify-content: center;
+  
   @media screen and (max-width: 700px) {
+
   }
 `;
 
 // 학생회 선택 Text
 const CampusText = styled.div`
+  width: 100%;
+  text-align: center;
+  margin: 10px 10px;
+  border-radius: 20px;
+  height: 110px;
+  line-height: 110px;
   font-weight: 800;
   font-size: 38px;
-  color: #949ba5;
+  color: #c3cbd5;
   @media screen and (max-width: 700px) {
     font-size: 150%;
+    height: 80px;
+    line-height: 80px;
   }
+  &:hover{
+    background: #f5f5f5;
+  }
+  /* border-bottom: 2px solid #eeeeee; */
 `;
 
 //물건이 필요한 곳 박스
@@ -103,7 +122,7 @@ const CampusBox = styled.div`
   padding: 20px 10px;
   margin-bottom: 100px;
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: rgba(209, 209, 209, 0.4) 0px 0px 15px;
   text-align: center;
   @media screen and (max-width: 700px) {
@@ -142,17 +161,17 @@ const Home = () => {
       <ParentContainer>
         {/* 글캠 링크 추가 */}
         <Link to={"/"}>
-          <ContainerBox>
+          <ContainerBox isLeft={true}>
             <CampusText>
-              <span style={{ color: "#379DFF" }}>글로벌</span> 캠퍼스
+              <span>글로벌</span> 캠퍼스
             </CampusText>
           </ContainerBox>
         </Link>
         {/* 메캠 링크 추가 */}
         <Link to={"/"}>
-          <ContainerBox>
+          <ContainerBox isLeft={false}>
             <CampusText>
-              <span style={{ color: "#379DFF" }}>메디컬</span> 캠퍼스
+              <span>메디컬</span> 캠퍼스
             </CampusText>
           </ContainerBox>
         </Link>

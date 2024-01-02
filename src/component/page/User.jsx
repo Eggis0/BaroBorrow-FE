@@ -192,9 +192,9 @@ const User = () => {
 
         </UserInfoBox>
         <Logout onClick={removeCookies}>로그아웃</Logout>
-        
-        <Certifi><Link to={"/certification"}><span>대여글을 작성하고 싶나요? <span>학생증 인증하기</span></span></Link></Certifi>
-        
+        {cookies.certification == false  ? 
+        <Certifi><Link to={"/certification"}><span>물건을 대여하고 싶나요? <span>학생증 인증하기</span></span></Link></Certifi>
+        : null}
       </UserBox>
       <MenuBar></MenuBar>
     </div>

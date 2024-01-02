@@ -15,7 +15,7 @@ const HeaderBox = styled.div`
   left: 0;
   right: 0;
   height: 50px;
-  /* border-bottom: ${({ nobg }) => (nobg ? 'none' : '1px solid #f0f0f0')}; */
+  border-bottom: ${({ nobg }) => (nobg ? 'none' : '1px solid #eeeeee')};
   @media screen and (min-width: 701px) {
     /* margin: 0px auto; */
     /* max-width: 701px; */
@@ -137,9 +137,9 @@ const HeaderCenterText = styled.span`
   width: 100%;
   height: 50px;
   line-height: 50px;
-  color: #757575;
+  color: #555555;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 23px;
 `;
 
 // 뒤로가기 버튼
@@ -296,6 +296,19 @@ const Header = ({headerType, headerText}) => {
             <HeaderBox>
             <HeaderContent>
             <HeaderBackBtn onClick={handleGoBack}><img src="/image/back.svg" alt="" /></HeaderBackBtn>
+            <HeaderCenterText>
+              {headerText}
+            </HeaderCenterText>
+            </HeaderContent>
+          </HeaderBox>
+          <EmptyBox></EmptyBox>
+          </div>
+        );
+      case "manage": // 어드민 페이지 내부
+        return (
+          <div>
+            <HeaderBox nobg={false}>
+            <HeaderContent>
             <HeaderCenterText>
               {headerText}
             </HeaderCenterText>

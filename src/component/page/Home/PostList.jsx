@@ -12,9 +12,9 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 
 const Wrapped = styled.div`
-  padding: 10px 2%;
+  padding: 7px 2%;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 17px;
   color: #505050;
   line-height: 25px;
   height: 25px;
@@ -34,10 +34,8 @@ const Wrapped = styled.div`
 const Title = styled.span`
   padding-left: 15px;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 17px;
   display: inline-block;
-  // line-height: 25px;
-  // height: 25px;
   color: #505050;
   @media screen and (max-width: 700px) {
     font-size: 15px;
@@ -46,11 +44,11 @@ const Title = styled.span`
 
 // 최신 글 상위 3개에 뜨는 이모지
 const ImageIcon = styled.img`
-  width: 23px;
+  width: 18px;
   float: right;
   vertical-align: middle;
   @media screen and (max-width: 700px) {
-    width: 17px;
+    width: 15px;
   }
 `;
 
@@ -66,6 +64,7 @@ const PostList = () => {
         const response1 = await axios.get(
           "http://" + process.env.REACT_APP_BACK_URL + "/post/news"
         );
+        console.log(response1.data);
         setPosts(response1.data);
       } catch (error) {
         console.log("포스트 오류 발생: ", error);
