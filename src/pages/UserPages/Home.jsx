@@ -97,8 +97,9 @@ const CampusText = styled.div`
     height: 80px;
     line-height: 80px;
   }
-  &:hover{
+  &:hover {
     background: #f5f5f5;
+    color: #379dff;
   }
 `;
 
